@@ -1,5 +1,7 @@
 package game.engine.cells;
 
+import game.engine.monsters.Monster;
+
 public abstract class TransportCell extends Cell {
 	private int effect;
 
@@ -10,6 +12,10 @@ public abstract class TransportCell extends Cell {
 
 	public int getEffect() {
 		return effect;
+	}
+	
+	public void transport(Monster monster) {
+	    monster.move(effect);
 	}
 	
 }

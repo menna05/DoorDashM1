@@ -100,7 +100,7 @@ public abstract class Monster implements Comparable<Monster> {
 	public void move(int distance) {
 		position=+distance;
 	}
-	public void alterEnergy(int energy) { //not to be overriden by any subclass
+	public final void alterEnergy(int energy) { 
 		if(isShielded()&& energy<0) {
 			 shielded=false;
 		}
