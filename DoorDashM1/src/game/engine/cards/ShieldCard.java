@@ -9,8 +9,12 @@ public class ShieldCard extends Card {
 	}
 
 	@Override
-	public void performAction(Monster landingMonster, Monster opponentMonster) {
-		// TODO Auto-generated method stub
+	public void performAction(Monster player, Monster opponent) {
+		player.setShielded(true);
+		
+		if(opponent.isShielded() == true) {
+			opponent.setShielded(false);
+		}
 		
 	}
 

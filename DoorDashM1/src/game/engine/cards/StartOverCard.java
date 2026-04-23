@@ -9,8 +9,13 @@ public class StartOverCard extends Card {
 	}
 
 	@Override
-	public void performAction(Monster landingMonster, Monster opponentMonster) {
-		// TODO Auto-generated method stub
+	public void performAction(Monster player, Monster opponent) {
+		if(isLucky() == true) {
+			opponent.setPosition(0);
+		}
+		else {
+			player.setPosition(0);
+		}
 		
 	}
 

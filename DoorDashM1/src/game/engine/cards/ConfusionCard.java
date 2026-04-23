@@ -1,5 +1,6 @@
 package game.engine.cards;
 
+import game.engine.Role;
 import game.engine.monsters.Monster;
 
 public class ConfusionCard extends Card {
@@ -15,8 +16,13 @@ public class ConfusionCard extends Card {
 	}
 
 	@Override
-	public void performAction(Monster landingMonster, Monster opponentMonster) {
-		// TODO Auto-generated method stub
+	public void performAction(Monster player, Monster opponent) {
+		player.setConfusionTurns(duration);
+		opponent.setConfusionTurns(duration);
+		
+		Role TempRole = player.getRole();
+		player.setRole(opponent.getRole());
+		opponent.setRole(TempRole);
 		
 	}
 

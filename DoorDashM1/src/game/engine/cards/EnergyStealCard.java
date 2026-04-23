@@ -22,8 +22,11 @@ public class EnergyStealCard extends Card implements CanisterModifier {
 	}
 
 	@Override
-	public void performAction(Monster landingMonster, Monster opponentMonster) {
-		// TODO Auto-generated method stub
+	public void performAction(Monster player, Monster opponent) {
+		int ToBeStolen = Math.min(this.energy, opponent.getEnergy());
+		modifyCanisterEnergy(opponent, -ToBeStolen);
+		modifyCanisterEnergy(player, ToBeStolen);
+		
 		
 	}
 	

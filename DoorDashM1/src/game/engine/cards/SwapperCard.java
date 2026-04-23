@@ -9,11 +9,11 @@ public class SwapperCard extends Card {
 	}
 
 	@Override
-	public void performAction(Monster landingMonster, Monster opponentMonster) {
-		if (landingMonster.getPosition()<  opponentMonster.getPosition()) {
-			int temp=landingMonster.getPosition();
-			landingMonster.setPosition(opponentMonster.getPosition());
-			opponentMonster.setPosition(landingMonster.getPosition());
+	public void performAction(Monster player, Monster opponent) {
+		if (player.getPosition()<  opponent.getPosition()) {
+			int temp=player.getPosition();
+			player.setPosition(opponent.getPosition());
+			opponent.setPosition(temp);
 			
 		}
 		
