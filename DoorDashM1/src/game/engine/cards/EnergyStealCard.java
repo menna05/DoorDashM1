@@ -20,5 +20,11 @@ public class EnergyStealCard extends Card implements CanisterModifier {
 	
 		
 	}
+
+	@Override
+	public void performAction(Monster landingMonster, Monster opponentMonster) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

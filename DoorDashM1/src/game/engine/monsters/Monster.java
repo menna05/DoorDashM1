@@ -98,19 +98,20 @@ public abstract class Monster implements Comparable<Monster> {
 	
 }
 	public void move(int distance) {
-		position=+distance;
+		position+=distance;
 	}
 	public final void alterEnergy(int energy) { 
-		if(isShielded()&& energy<0) {
+		if(isShielded() && energy<0) {
 			 shielded=false;
+			 return;
 		}
-			 else {
+		
 				 int newEnergy= getEnergy() + energy;
-				 if (newEnergy<0) {
+				 
+				 if (newEnergy<0) {//from milestone 1 (important) 
 					 newEnergy=0;
 				 }
 				 setEnergy(newEnergy);
-			 }
 		}
 	
 	public void decrementConfusion() {

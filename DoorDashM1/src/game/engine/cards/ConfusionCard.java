@@ -1,5 +1,7 @@
 package game.engine.cards;
 
+import game.engine.monsters.Monster;
+
 public class ConfusionCard extends Card {
 	private int duration;
 	
@@ -10,6 +12,12 @@ public class ConfusionCard extends Card {
 	
 	public int getDuration() {
 		return duration;
+	}
+
+	@Override
+	public void performAction(Monster landingMonster, Monster opponentMonster) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

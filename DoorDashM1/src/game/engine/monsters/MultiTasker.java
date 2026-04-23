@@ -19,10 +19,16 @@ public class MultiTasker extends Monster {
 	}
 	public void executePowerupEffect(Monster opponentMonster) {
 		
-		 this.normalSpeedTurns = 2;
+		 normalSpeedTurns = 2;
     }
 
-   
+	public double getMovementMultiplier() {
+	    if (  normalSpeedTurns> 0) {
+	    	 normalSpeedTurns--;
+	        return 1.0; 
+	    }
+	    return 0.5; 
+	}
     public void setEnergy(int energy) {
        
         super.setEnergy(energy + 200);

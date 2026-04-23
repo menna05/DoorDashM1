@@ -20,4 +20,12 @@ public class Dasher extends Monster {
 	public void executePowerupEffect(Monster opponentMonster) {
 		setMomentumTurns(3);
 	}
-}
+		public int getMovementMultiplier() {
+	        if (momentumTurns > 0) {
+	            momentumTurns--;
+	            return 3;
+	        }
+	        return 2;
+	    }
+	
+	}
