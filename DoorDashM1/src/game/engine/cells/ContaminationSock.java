@@ -7,7 +7,7 @@ import game.engine.monsters.Monster;
 public class ContaminationSock extends TransportCell implements CanisterModifier {
 
 	public ContaminationSock(String name, int effect) {
-		super(name, effect);
+		super(name,  effect);
 	}
 
 	@Override

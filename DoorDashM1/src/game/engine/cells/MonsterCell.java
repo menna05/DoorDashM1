@@ -14,23 +14,24 @@ public class MonsterCell extends Cell {
 		return cellMonster;
 	}
 	
-	@Override
-	public void onLand(Monster landingMonster, Monster opponentMonster) {
-	    super.onLand(landingMonster, opponentMonster);
+	 @Override
+	    public void onLand(Monster landingMonster, Monster opponentMonster) {
+	        super.onLand(landingMonster, opponentMonster);
 
-	    if (landingMonster.getRole() == cellMonster.getRole()) {
+	        if (cellMonster.getRole() == landingMonster.getRole()) {
+	        
+	            landingMonster.executePowerupEffect(opponentMonster);
+	        } else {
+	           
+	            if (landingMonster.getEnergy() > cellMonster.getEnergy()) {
+	                int landingEnergy = landingMonster.getEnergy();
+	                int stationedEnergy = cellMonster.getEnergy();
 
-	        landingMonster.executePowerupEffect(opponentMonster);
-
-	    } else {
-
-	        if (landingMonster.getEnergy() > cellMonster.getEnergy()) {
-
-	            int temp = landingMonster.getEnergy();
-	            landingMonster.setEnergy(cellMonster.getEnergy());
-	            cellMonster.setEnergy(temp);
+	                
+	                cellMonster.setEnergy(landingEnergy); 
+	                landingMonster.alterEnergy(stationedEnergy - landingEnergy); 
+	            }
 	        }
 	    }
-	}
 
 }
