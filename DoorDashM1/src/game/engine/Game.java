@@ -17,17 +17,20 @@ public class Game {
 	private Monster current;
 	
 	public Game(Role playerRole) throws IOException {
-		this.board = new Board(DataLoader.readCards());
-		
-		this.allMonsters = DataLoader.readMonsters();
-		this.player = selectRandomMonsterByRole(playerRole);
-		this.opponent = selectRandomMonsterByRole(playerRole == Role.SCARER ? Role.LAUGHER : Role.SCARER);
-		this.current = player;
-
-		allMonsters.remove(player);
-		allMonsters.remove(opponent);
-		Board.setStationedMonsters(new ArrayList<>(allMonsters));
-		this.board.initializeBoard(DataLoader.readCells());
+	    this.board = new Board(DataLoader.readCards());
+	    
+	    this.allMonsters = DataLoader.readMonsters();
+	    this.player = selectRandomMonsterByRole(playerRole);
+	    this.opponent = selectRandomMonsterByRole(playerRole == Role.SCARER ? Role.LAUGHER : Role.SCARER);
+	    this.current = player;
+	    
+	    // separate list for stationed monsters, don't touch allMonsters
+	    ArrayList<Monster> stationed = new ArrayList<>(allMonsters);
+	    stationed.remove(player);
+	    stationed.remove(opponent);
+	    Board.setStationedMonsters(stationed);
+	    
+	    this.board.initializeBoard(DataLoader.readCells());
 	}
 	
 	public Board getBoard() {
@@ -92,9 +95,9 @@ public class Game {
 	}
 
 	private boolean checkWinCondition(Monster monster) {
-		return monster.getPosition() >= (Constants.BOARD_SIZE - 1);
+	    return monster.getPosition() >= (Constants.BOARD_SIZE - 1) 
+	        && monster.getEnergy() >= Constants.WINNING_ENERGY;
 	}
-
 	public Monster getWinner() {
 		if (checkWinCondition(player)) return player;
 		if (checkWinCondition(opponent)) return opponent;

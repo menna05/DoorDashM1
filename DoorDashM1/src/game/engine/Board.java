@@ -13,7 +13,7 @@ public class Board {
 	private static ArrayList<Monster> stationedMonsters; 
 	private static ArrayList<Card> originalCards;
 	public static ArrayList<Card> cards;
-	private static ArrayList<Card> rawCards;
+
 	
 	public Board(ArrayList<Card> readCards) {
 		this.boardCells = new Cell[Constants.BOARD_ROWS][Constants.BOARD_COLS];
@@ -131,19 +131,24 @@ public class Board {
 	    }
 	}
 	private void setCardsByRarity() {
-		ArrayList<Card> expandedList = new ArrayList<Card>();
-		for (Card card : originalCards) {
-			for (int i = 0; i < card.getRarity(); i++) {
-				expandedList.add(card);
-			}
-		}
-
-		originalCards = expandedList;
+	    ArrayList<Card> expandedList = new ArrayList<Card>();
+	    for (Card card : originalCards) {
+	        for (int i = 0; i < card.getRarity(); i++) {
+	            expandedList.add(card);
+	        }
+	    }
+	    cards = expandedList; 
 	}
 	
 	public static void reloadCards() {
-		cards = new ArrayList<Card>(originalCards);
-		Collections.shuffle(cards);
+	    ArrayList<Card> expanded = new ArrayList<>();
+	    for (Card card : originalCards) {
+	        for (int i = 0; i < card.getRarity(); i++) {
+	            expanded.add(card);
+	        }
+	    }
+	    cards = expanded;
+	    Collections.shuffle(cards);
 	}
 	public void moveMonster(Monster currentMonster, int roll, Monster opponentMonster) throws InvalidMoveException {
 		
