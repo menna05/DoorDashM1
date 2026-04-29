@@ -20,15 +20,13 @@ public class Game {
 		this.board = new Board(DataLoader.readCards());
 		
 		this.allMonsters = DataLoader.readMonsters();
-		
 		this.player = selectRandomMonsterByRole(playerRole);
 		this.opponent = selectRandomMonsterByRole(playerRole == Role.SCARER ? Role.LAUGHER : Role.SCARER);
 		this.current = player;
-		
-		ArrayList<Monster> stationed = new ArrayList<>(allMonsters);
-		stationed.remove(player);
-		stationed.remove(opponent);
-		Board.setStationedMonsters(stationed);
+
+		allMonsters.remove(player);
+		allMonsters.remove(opponent);
+		Board.setStationedMonsters(new ArrayList<>(allMonsters));
 		this.board.initializeBoard(DataLoader.readCells());
 	}
 	

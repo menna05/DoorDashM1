@@ -13,6 +13,7 @@ public class Board {
 	private static ArrayList<Monster> stationedMonsters; 
 	private static ArrayList<Card> originalCards;
 	public static ArrayList<Card> cards;
+	private static ArrayList<Card> rawCards;
 	
 	public Board(ArrayList<Card> readCards) {
 		this.boardCells = new Cell[Constants.BOARD_ROWS][Constants.BOARD_COLS];
@@ -125,7 +126,7 @@ public class Board {
 	            Monster stationedMonster = stationedMonsters.get(monsterIndex++);
 	            
 	            stationedMonster.setPosition(idx); 
-	            setCell(idx, new MonsterCell("Monster Cell", stationedMonster));
+	            setCell(idx, new MonsterCell(stationedMonster.getName(), stationedMonster));
 	        }
 	    }
 	}
@@ -154,7 +155,7 @@ public class Board {
 		currentMonster.setPosition(newPosition);
 		Cell landedCell = getCell(currentMonster.getPosition());
 		if (landedCell != null) {
-			landedCell.onLand(currentMonster); 
+			landedCell.onLand(currentMonster, opponentMonster); 
 		}
 
 		if (currentMonster.getPosition() == opponentMonster.getPosition()) {
@@ -162,12 +163,9 @@ public class Board {
 			throw new InvalidMoveException("Invalid Move: Collision with opponent monster!");
 		}
 
-		if (currentMonster.getConfusionTurns() > 0 && currentOldConfusion > 0) {
-			currentMonster.setConfusionTurns(currentMonster.getConfusionTurns() - 1);
-		}
-		
-		if (opponentMonster.getConfusionTurns() > 0 && opponentOldConfusion > 0) {
-			opponentMonster.setConfusionTurns(opponentMonster.getConfusionTurns() - 1);
+		if (currentOldConfusion > 0 && opponentOldConfusion > 0) {
+		    currentMonster.decrementConfusion();
+		    opponentMonster.decrementConfusion();
 		}
 
 		updateMonsterPositions(currentMonster, opponentMonster);

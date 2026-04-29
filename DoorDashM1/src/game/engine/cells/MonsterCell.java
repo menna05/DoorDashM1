@@ -23,14 +23,13 @@ public class MonsterCell extends Cell {
 	            landingMonster.executePowerupEffect(opponentMonster);
 	        } else {
 	           
-	            if (landingMonster.getEnergy() > cellMonster.getEnergy()) {
-	                int landingEnergy = landingMonster.getEnergy();
-	                int stationedEnergy = cellMonster.getEnergy();
+	        	if (landingMonster.getEnergy() > cellMonster.getEnergy()) {
+	        	    int landingEnergy = landingMonster.getEnergy();
+	        	    int stationedEnergy = cellMonster.getEnergy();
 
-	                
-	                cellMonster.setEnergy(landingEnergy); 
-	                landingMonster.alterEnergy(stationedEnergy - landingEnergy); 
-	            }
+	        	    cellMonster.alterEnergy(landingEnergy - stationedEnergy); 
+	        	    landingMonster.alterEnergy(stationedEnergy - landingEnergy); 
+	        	}
 	        }
 	    }
 

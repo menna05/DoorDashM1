@@ -37,11 +37,12 @@ public class DoorCell extends Cell implements CanisterModifier {
 
 	@Override
 	public void modifyCanisterEnergy(Monster monster, int canisterValue) {
-		 monster.alterEnergy(canisterValue);
-	
-		
+	    if (monster.getRole() == role) {
+	        monster.alterEnergy(canisterValue);
+	    } else {
+	        monster.alterEnergy(-canisterValue);
+	    }
 	}
-	
 	
 	@Override
 	public void onLand(Monster landingMonster, Monster opponentMonster) {
@@ -50,20 +51,23 @@ public class DoorCell extends Cell implements CanisterModifier {
 	        int energyChange = (landingMonster.getRole() == role) ? energy : -energy;
 	        
 	        int before = landingMonster.getEnergy();
-	        modifyCanisterEnergy(landingMonster, energyChange);
-	        boolean changed = landingMonster.getEnergy() != before;
+	        modifyCanisterEnergy(landingMonster, energy);
+	        boolean landingChanged = landingMonster.getEnergy() != before;
+	        boolean shieldBlocked = landingMonster.isShielded() == false && before == landingMonster.getEnergy() && energyChange < 0;
 	        
-
-	        for (Monster m : Board.getStationedMonsters()) {
-	            if (m.getRole() == landingMonster.getRole()) {
-	                int mBefore = m.getEnergy();
-	                modifyCanisterEnergy(m, energyChange);
-	                if (m.getEnergy() != mBefore) changed = true;
+	        boolean changed = landingChanged;
+	        
+	        if (!shieldBlocked) {
+	            for (Monster m : Board.getStationedMonsters()) {
+	                if (m.getRole() == landingMonster.getRole()) {
+	                    int mBefore = m.getEnergy();
+	                    modifyCanisterEnergy(m, energy);
+	                    if (m.getEnergy() != mBefore) changed = true;
+	                }
 	            }
 	        }
-
 	        if (changed) {
-	        	activated = true;
+	            activated = true;
 	        }
 	    }
 	}

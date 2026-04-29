@@ -27,7 +27,7 @@ public class Cell {
 	    return monster != null;
 	}
 	
-	public void onLand(Monster landingMonster) {
+	public void onLand(Monster landingMonster, Monster opponentMonster) {
 	    this.monster = landingMonster;
 	}
 

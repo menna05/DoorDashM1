@@ -10,11 +10,10 @@ import game.engine.Role;
 		super(name, description, role, energy);
 	}
 	private int stealEnergyFrom(Monster target) {
-		 int stealAmount = Math.min(target.getEnergy(), Constants.SCHEMER_STEAL);
-		    target.setEnergy(target.getEnergy()-stealAmount);
-		    return stealAmount;
+	    int stealAmount = Math.min(target.getEnergy(), Constants.SCHEMER_STEAL);
+	    target.alterEnergy(-stealAmount);
+	    return stealAmount;
 	}
-	
 	public  void executePowerupEffect(Monster opponentMonster) {
 		       int totalStolen=0;
 		      totalStolen += stealEnergyFrom(opponentMonster);
@@ -28,11 +27,11 @@ import game.engine.Role;
 	           super.alterEnergy(totalStolen);
 	}
 	public int modifyIncomingEnergy(int energy) {
-	    if (energy > 0) {
+	    
 	        return energy + Constants.SCHEMER_STEAL;
-	    }
-	    return energy;
+	   
 	}
+	
  }
 	
 
