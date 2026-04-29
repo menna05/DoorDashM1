@@ -19,10 +19,19 @@ import game.engine.Role;
 		       int totalStolen=0;
 		      totalStolen += stealEnergyFrom(opponentMonster);
 		      for (Monster m : Board.getStationedMonsters()) {
-		          totalStolen += stealEnergyFrom(m);
+		          
+		          if (m != opponentMonster) { 
+		              totalStolen += stealEnergyFrom(m);
+		          }
 		      }
 		   
-	           super.alterEnergy(getEnergy() + 10);
+	           super.alterEnergy(totalStolen);
+	}
+	public int modifyIncomingEnergy(int energy) {
+	    if (energy > 0) {
+	        return energy + Constants.SCHEMER_STEAL;
+	    }
+	    return energy;
 	}
  }
 	

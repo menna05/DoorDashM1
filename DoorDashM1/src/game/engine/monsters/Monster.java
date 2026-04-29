@@ -98,11 +98,17 @@ public abstract class Monster implements Comparable<Monster> {
 	
 }
 	public void move(int distance) {
-		position+=distance;
+		setPosition(getPosition()+distance);
 	}
-	public final void alterEnergy(int energy) { 
-		if(isShielded() && energy<0) {
-			 shielded=false;
+	public int modifyIncomingEnergy(int energy) {
+	    return energy; 
+	}
+	public final void alterEnergy(int energy) { // only when sheild is respected 
+		energy = modifyIncomingEnergy(energy);
+		        
+		    
+		if(this.isShielded() && energy<0) {
+			 this.setShielded(false);
 			 return;
 		}
 		
@@ -118,8 +124,9 @@ public abstract class Monster implements Comparable<Monster> {
 		if ( getConfusionTurns()> 0) {
 			confusionTurns--;
 		}
-		if (getConfusionTurns()==0) {
+	    if(getConfusionTurns()==0) {
 			role=originalRole;
 		}
+	
 	}
 }

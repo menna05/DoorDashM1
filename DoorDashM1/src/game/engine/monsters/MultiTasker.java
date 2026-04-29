@@ -24,13 +24,18 @@ public class MultiTasker extends Monster {
 
 	public double getMovementMultiplier() {
 	    if (  normalSpeedTurns> 0) {
-	    	 normalSpeedTurns--;
+	    	 
 	        return 1.0; 
 	    }
-	    return 0.5; 
+	    return 2.0; 
 	}
-    public void setEnergy(int energy) {
-       
-        super.setEnergy(energy + 200);
+	
+	public void endTurn() {
+        if (normalSpeedTurns > 0) {
+            normalSpeedTurns--;
+        }
     }
+	public int modifyIncomingEnergy(int energy) {
+		return energy + 200;
+	}
 }
