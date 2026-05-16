@@ -60,7 +60,7 @@ public abstract class Monster implements Comparable<Monster> {
 	}
 
 	public void setPosition(int position) {
-		this.position = position % Constants.BOARD_SIZE;
+	    this.position = Math.min(position, Constants.WINNING_POSITION);
 	}
 	
 	public boolean isFrozen() {
