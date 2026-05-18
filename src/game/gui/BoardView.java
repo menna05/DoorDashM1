@@ -270,6 +270,7 @@ public class BoardView {
  
         root.widthProperty().addListener((obs, oldV, newV) -> applyScaling());
         root.heightProperty().addListener((obs, oldV, newV) -> applyScaling());
+        root.setFocusTraversable(true);
     }
  
     private String toHex(Color c) {
